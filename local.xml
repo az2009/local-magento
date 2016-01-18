@@ -1,0 +1,180 @@
+<?xml version="1.0" ?>
+
+<layout>
+
+	<default>
+
+		<!-- Blocos de template -->
+			<block type="core/template" name="block1" template="teste/teste2.phtml">
+
+				<!-- Inserindo uma variável customizada no bloco -->
+					<action method="setData"><name>block_id</name><value>1</value></action>
+			</block>
+
+			<block type="core/template" name="block2" template="teste/teste2.phtml">
+
+				<!-- Inserindo uma variável customizada no bloco -->
+					<action method="setData"><name>block_id</name><value>2</value></action>
+			</block>
+
+		<!-- Declarando Bloco estrutual
+
+			  Chamando o bloco estrutural no page 1column.phtml <?php echo $this->getChildHtml('container_custom_footer')?> -->
+
+			<reference name="root">
+				<block type="core/text_list" name="container.custom.footer" as="container_custom_footer" translate="label">
+					<label>Container Custom Footer</label>
+				</block>
+			</reference>
+
+
+		<!-- Referência ao bloco estrutural 'container_custom_footer' -->
+			<reference name="container.custom.footer">
+
+			<!-- Declarando o bloco de container -->
+				<block type="page/html_wrapper" name="wrapper.custom.footer" as="wrapper_custom">
+					<action method="setElementClass"><value>classContainer</value></action>
+					<action method="setElementId"><value>idContainer</value></action>
+				</block>
+			</reference>
+
+		<!-- Referência ao bloco de container  -->
+			<reference name="wrapper.custom.footer">
+
+				<!-- Maneiras de setar blocos filhos -->
+
+					<block type="core/template" name="block3" as="block3" template="teste/teste2.phtml">
+
+						<!-- Inserindo uma variável customizada no bloco -->
+							<action method="setData"><name>block_id</name><value>3</value></action>
+					</block>
+
+					<action method="append">
+						<block>block1</block>
+					</action>
+
+					<action method="insert">
+						<block>block2</block>
+					</action>
+
+					<action method="append">
+						<block>store_language</block>
+					</action>
+
+			</reference>
+
+			<reference name="content">
+
+				<!-- Chamando um bloco CMS -->
+					<block type="cms/block" name="bloco.cms">
+						<action method="setBlockId">
+							<blockId>footer_links_sm</blockId>
+						</action>
+					</block>
+			</reference>
+
+
+		<!-- Removendo um bloco -->
+			<reference name="header">
+
+				<!-- Removendo qualquer bloco -->
+					<remove name="store_language" />
+
+				<!-- Removendo um bloco filho -->
+					<action method="unsetChild">
+						<block>welcome</block>
+					</action>
+			</reference>
+
+
+			<reference name="head">
+				<!-- Inserindo CSS -->
+
+					<!-- Via addItem -->
+						<action method="addItem">
+							<type>skin_css</type>
+							<path>folha/folha1.css</path>
+						</action>
+
+					<!-- Via addCss -->
+						<action method="addCss">
+							<stylesheet>folha/folha2.css</stylesheet>
+						</action>
+
+				<!-- Inserindo Js -->
+
+					<!-- Via addJs -->
+						<action method="addJs">
+							<path>script.js</path>
+						</action>
+
+					<!-- Via addItem -->
+						<action method="addItem">
+							<type>skin_js</type>
+							<path>js/script.js</path>
+						</action>
+
+				<!-- Inserindo uma tag extra no head -->
+						<block type="core/text" name="text.custom">
+							<action method="setText">
+								<text><![CDATA[<link rel="stylesheet" href="http://www.uol.com.br/st.css" media="all"/>]]></text>
+							</action>
+						</block>
+
+			</reference>
+
+
+	</default>
+
+	<!-- Setando o template 2 colunas a direita para as categorias -->
+		<catalog_category_view>
+			<reference name="root">
+				<action method="setTemplate">
+					<!--<template>page/1column.phtml</template>-->
+					<!--<template>page/2columns-right.phtml</template>-->
+					<template>page/2columns-left.phtml</template>
+					<!--<template>page/3columns.phtml</template>-->
+					<!--<template>pasta/arquivo_customizado.phtml</template>-->
+				</action>
+			</reference>
+		</catalog_category_view>
+
+	<!-- Principais handles -->
+		<!--
+			Categoria 		- <catalog_category_view>
+							  <catalog_category_default>
+							  <catalog_category_layered>
+
+			Produto 	 	- <PRODUCT_TYPE_configurable>
+							  <PRODUCT_TYPE_simple>
+							  <PRODUCT_TYPE_grouped>
+							  <catalog_product_view>
+
+			Carrinho  	    - <checkout_cart_index>
+
+			Checkout 		- <checkout_onepage_index>
+						      <checkout_onepage_progress_shipping_method>
+						      <checkout_onepage_progress_shipping>
+						      <checkout_onepage_progress_billing>
+						      <checkout_onepage_paymentmethod>
+						      <checkout_onepage_review>
+
+			Páginas CMS 	- <cms_page>
+							  <cms_index_index>
+							  <cms_index_index>
+
+			Contato 		- <contacts_index_index>
+		 -->
+
+</layout>
+
+
+
+
+
+
+
+
+
+
+
