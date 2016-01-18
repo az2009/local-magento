@@ -126,6 +126,11 @@
 
 	</default>
 
+	<cms_index_index>
+		<update handle="customer_account_login" />
+	</cms_index_index>
+
+
 	<!-- Setando o template 2 colunas a direita para as categorias -->
 		<catalog_category_view>
 			<reference name="root">
