@@ -4,6 +4,15 @@
 
 	<default>
 
+		<!-- Inserindo um link em top links -->
+			<reference name="top.links">
+				<action method="addLink">
+					<label>Link custom</label>
+					<url>/magento</url>
+					<title>Um link customizado</title>
+				</action>
+			</reference>
+
 		<!-- Blocos de template -->
 			<block type="core/template" name="block1" template="teste/teste2.phtml">
 
@@ -122,14 +131,36 @@
 						</block>
 
 			</reference>
-
-
 	</default>
 
 	<cms_index_index>
-		<update handle="customer_account_login" />
-	</cms_index_index>
 
+		<!-- Colocando produtos de uma categoria na home -->
+			<reference name="content">
+
+				<block type="catalog/product_list" name="home.product.list" template="catalog/product/list.phtml" before="-">
+
+					<action method="setCategoryId"><value>22</value></action>
+					<action method="setMode"><value>list</value></action>
+					<action method="setColumnCount"><value>2</value></action>
+					<action method="setCount"><value>2</value></action>
+					<action method="setLimit"><value>2</value></action>
+				</block>
+
+		<!-- Chamando um produto especifico em um bloco -->
+				<!--<block type="catalog/product_view" name="home.product.view" template="catalog/product/view.phtml">
+					<action method="setProductId"><value>433</value></action>
+				</block>-->
+
+		<!-- Listando os produtos visualizados recente-->
+				<block type="reports/product_viewed" before="-" name="home.product.viewed" template="reports/product_viewed.phtml" />
+
+			</reference>
+
+		<!-- Trazendo a página de login para a home -->
+			<update handle="customer_account_login" />
+
+	</cms_index_index>
 
 	<!-- Setando o template 2 colunas a direita para as categorias -->
 		<catalog_category_view>
@@ -142,7 +173,32 @@
 					<!--<template>pasta/arquivo_customizado.phtml</template>-->
 				</action>
 			</reference>
+
 		</catalog_category_view>
+
+		<checkout_onepage_index>
+
+			<reference name="right">
+
+				<!-- Adicionar o carrinho na sidebar -->
+				<!-- Habilitar a opção system -> configuration -> checkout -> Shopping Cart Sidebar [Display Shopping Cart Sidebar][yes] -->
+					<block type="checkout/cart_sidebar" name="minicart.content.onepage" template="checkout/cart/sidebar.phtml" />
+			</reference>
+		</checkout_onepage_index>
+
+
+	<!-- Parâmetros que uma tag pode ter -->
+		<!-- block: name|type|as|template|before|after -->
+		<!-- action: ifconfig|method -->
+		<!-- reference: name -->
+		<!-- remove: name -->
+		<!-- update: handle -->
+		<!--  -->
+
+	<!-- Tipos de blocos mais usados -->
+		<!-- core/template = Blocos de template .phtml -->
+		<!-- core/text_list = Blocos estruturais -->
+		<!-- catalog/product_list = Listagem de produtos -->
 
 	<!-- Principais handles -->
 		<!--
@@ -169,6 +225,17 @@
 							  <cms_index_index>
 
 			Contato 		- <contacts_index_index>
+		 -->
+
+	<!-- Principais reference de blocos-->
+		<!--
+			- top.links
+			- footer.links
+			- header
+			- head
+			- footer
+			- content
+			- root
 		 -->
 
 </layout>

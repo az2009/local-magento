@@ -1,0 +1,26 @@
+- Chamada de um template através de um block via CMS
+  - Passando uma variável como parâmetro
+   	{{block type="core/template" block_id=4 template="teste/teste2.phtml"}}
+
+- Lista de produtos de uma categoria via CMS
+	{{block type="catalog/product_list" name="product_list" category_id="3" column_count="6" count="6" limit="4" mode="grid" template="catalog/product/list.phtml"}}
+
+- Lista um random de produtos de uma catagoria
+	{{block type="catalog/product_list_random" category_id="3" template="catalog/product/list.phtml"}}
+
+- Lista os novos produtos de acordo com a quantidade informada
+	{{block type="catalog/product_new" name="home.catalog.product.new" alias="product_homepage" template="catalog/product/new.phtml" _productsCount="10"}}
+
+- Lista os produtos visualizados
+    {{block type="catalog/product_view" name-"home.catalog.product.view" template="catalog/product/view.phtml"}}
+
+- Listando um produto especifico
+  	{{block type="catalog/product_view" product_id="1" template="catalog/product/view.phtml"}}
+
+- Listando os produtos visualizados recente
+ 	{{block type="reports/product_viewed" template="reports/product_viewed.phtml"}}
+
+- Chamando um bloco CMS em uma página
+	{{block type="cms/block" block_id="identificar-do-bloco"}}
+
+
