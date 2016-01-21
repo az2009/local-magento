@@ -4,13 +4,20 @@
 
 	<default>
 
-		<!-- Inserindo um link em top links -->
 			<reference name="top.links">
-				<action method="addLink">
-					<label>Link custom</label>
-					<url>/magento</url>
-					<title>Um link customizado</title>
-				</action>
+
+				<!-- Inserindo um link em top links -->
+					<action method="addLink">
+						<label>Link custom</label>
+						<url>/magento/</url>
+						<title>Um link customizado</title>
+					</action>
+
+				<!-- Removendo um link em top links-->
+		            <action method="removeLinkByUrl">
+		           	 	<url>/magento/</url>
+		            </action>
+
 			</reference>
 
 		<!-- Blocos de template -->
@@ -26,11 +33,11 @@
 					<action method="setData"><name>block_id</name><value>2</value></action>
 			</block>
 
-		<!-- Declarando Bloco estrutual
-
-			  Chamando o bloco estrutural no page 1column.phtml <?php echo $this->getChildHtml('container_custom_footer')?> -->
-
 			<reference name="root">
+
+			<!-- Declarando Bloco estrutual
+			  	Chamando o bloco estrutural no page 1column.phtml <?php echo $this->getChildHtml('container_custom_footer')?> -->
+
 				<block type="core/text_list" name="container.custom.footer" as="container_custom_footer" translate="label">
 					<label>Container Custom Footer</label>
 				</block>
@@ -99,10 +106,22 @@
 			<reference name="head">
 				<!-- Inserindo CSS -->
 
+					<!-- Add css  via link rel -->
+						<action method="addLinkRel">
+							<rel>stylesheet</rel>
+							<href>http://az2009.com/magento/css.css</href>
+						</action>
+
 					<!-- Via addItem -->
 						<action method="addItem">
 							<type>skin_css</type>
 							<path>folha/folha1.css</path>
+						</action>
+
+					<!-- Removendo um item -->
+						<action method="removeItem">
+							<type>skin_css</type>
+							<name>folha/folha3.css</name>
 						</action>
 
 					<!-- Via addCss -->
@@ -117,10 +136,16 @@
 							<path>script.js</path>
 						</action>
 
-					<!-- Via addItem -->
-						<action method="addItem">
+					<!-- Remover um item js do skin -->
+						<action method="removeItem">
 							<type>skin_js</type>
-							<path>js/script.js</path>
+							<path>js/script3.js</path>
+						</action>
+
+					<!-- Remover um item do js raiz -->
+						<action method="removeItem">
+							<type>js</type>
+							<path>folder/file.js</path>
 						</action>
 
 				<!-- Inserindo uma tag extra no head -->
