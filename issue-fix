@@ -1,0 +1,5 @@
+ISSUE FIX
+
+community not install
+chmod 777 mage
+./mage mage-setup
